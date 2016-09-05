@@ -4,6 +4,5 @@ target/
 .mvn/
 mvnw
 mvnw.cmd
-pom.xml
 reactive.iml
 tomcat.8080/
