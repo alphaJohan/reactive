@@ -16,36 +16,35 @@
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Workshop helper stuff</div>
+                <div class="panel-body">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <button id="generate" class="btn btn-default" type="submit">Generate data file</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="">
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
                     <label for="connect">WebSocket connection:</label>
                     <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                    </button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
                 </div>
             </form>
         </div>
-        <!--<div class="col-md-6">-->
-            <!--<form class="form-inline">-->
-                <!--<div class="form-group">-->
-                    <!--<label for="name">What is your name?</label>-->
-                    <!--<input type="text" id="name" class="form-control" placeholder="Your name here...">-->
-                <!--</div>-->
-                <!--<button id="send" class="btn btn-default" type="submit">Send</button>-->
-            <!--</form>-->
-        <!--</div>-->
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Messages</th>
-                </tr>
-                </thead>
-                <tbody id="greetings">
-                </tbody>
-            </table>
+            <div id="message"></div>
         </div>
     </div>
     </form>

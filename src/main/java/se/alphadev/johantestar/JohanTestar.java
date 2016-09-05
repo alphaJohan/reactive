@@ -5,7 +5,8 @@ import reactor.core.publisher.Flux;
 public class JohanTestar {
 
     private void apa() {
-//        Flux<String> flux = Flux.just("red", "white", "blue");
+        Flux<String> flux = Flux.just("red", "white", "blue");
+
 //
 //        Flux<String> upper = flux
 //                .log()

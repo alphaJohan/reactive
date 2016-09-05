@@ -3,13 +3,7 @@ var stompClient = null;
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
-    if (connected) {
-        $("#conversation").show();
-    }
-    else {
-        $("#conversation").hide();
-    }
-    $("#greetings").html("");
+    $("#message").html("");
 }
 
 function connect() {
@@ -18,11 +12,11 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/heartrates', function (message) {
+        stompClient.subscribe('/topic/data', function (message) {
             // showGreeting(JSON.parse(greeting.body).content);
             showGreeting(message.body);
         });
-        $.ajax({url: "/heartrate", type:'POST', success: function(result){
+        $.ajax({url: "/openstream", type:'POST', success: function(result){
 
         }});
     });
@@ -41,7 +35,13 @@ function disconnect() {
 //}
 
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    $("#message").html(message);
+}
+
+function generate() {
+    $.ajax({url: "/generate", type:'POST', success: function(result){
+        console.log('Data file generated');
+    }});
 }
 
 $(function () {
@@ -50,6 +50,6 @@ $(function () {
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    // $( "#send" ).click(function() { sendName(); });
+    $( "#generate" ).click(function() { generate(); });
 });
 
