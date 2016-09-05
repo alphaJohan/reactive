@@ -16,7 +16,7 @@ public class HeartRateMonitorFileReader {
         try {
             BufferedReader reader = Files.newBufferedReader(file, charset);
             //Stream<String> foo = Files.lines(file);
-//            String line = null;
+            String line = null;
             while (true) {
                 Flux<String> flux = Flux.fromStream(reader.lines());
                 flux.subscribe(System.out::println);
@@ -30,12 +30,12 @@ public class HeartRateMonitorFileReader {
         }
     }
 
-    public static void main(String[] args) {
-        HeartRateMonitorFileReader apa = new HeartRateMonitorFileReader();
-        try {
-            apa.readFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        HeartRateMonitorFileReader apa = new HeartRateMonitorFileReader();
+//        try {
+//            apa.readFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
