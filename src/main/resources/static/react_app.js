@@ -18,6 +18,10 @@ var MessageTable = React.createClass({
             stompClient.subscribe('/topic/data', function (message) {
                 reactMessages.push(message.body);
                 this.setState({messages: reactMessages});
+                if (message.body === 'finished') {
+                    console.log('Closing stream');
+                    disconnect();
+                }
             }.bind(this));
         }.bind(this));
     },
@@ -56,20 +60,8 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/reactive-with-websocket');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/data', function (message) {
-            // showGreeting(JSON.parse(greeting.body).content);
-            showMessage(message.body);
-            //reactMessages.push(message);
-
-        });
-    });
     $.ajax({url: "/openstream", type:'POST', success: function(result){
-
+        setConnected(true);
     }});
 }
 
@@ -80,12 +72,6 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
-
-function showMessage(message) {
-    $("#messages").append("<tr><td>" + message + "</td></tr>");
-}
-
-
 
 function generate() {
     $.ajax({url: "/generate", type:'POST', success: function(result){
@@ -100,8 +86,6 @@ $(function () {
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#generate" ).click(function() { generate(); });
-
-
 
 });
 
