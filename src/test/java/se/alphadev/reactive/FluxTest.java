@@ -1,10 +1,9 @@
-package se.alphadev;
+package se.alphadev.reactive;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
-import se.alphadev.johantestar.Person;
 
 import java.io.FileInputStream;
 import java.io.IOException;

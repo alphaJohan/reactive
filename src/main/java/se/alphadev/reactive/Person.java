@@ -1,7 +1,4 @@
-package se.alphadev.johantestar;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+package se.alphadev.reactive;
 
 public class Person {
     enum Type {

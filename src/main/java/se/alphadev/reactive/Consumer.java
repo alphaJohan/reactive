@@ -1,14 +1,12 @@
-package se.alphadev;
+package se.alphadev.reactive;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-import se.alphadev.johantestar.Person;
+import se.alphadev.reactive.Person;
 
 import java.io.FileInputStream;
 import java.io.IOException;
