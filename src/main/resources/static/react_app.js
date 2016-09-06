@@ -1,5 +1,4 @@
 var stompClient = null;
-// var reactMessages = ['foo', 'bar'];
 var reactMessages = [];
 
 var TableRow = React.createClass({
@@ -13,7 +12,14 @@ var MessageTable = React.createClass({
         return {messages: this.props.messages};
     },
     componentDidMount: function() {
-        // this.setState({messages: reactMessages});
+        var socket = new SockJS('/reactive-with-websocket');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            stompClient.subscribe('/topic/data', function (message) {
+                reactMessages.push(message.body);
+                this.setState({messages: reactMessages});
+            }.bind(this));
+        }.bind(this));
     },
     render: function() {
         var i = 0;
@@ -37,7 +43,6 @@ var MessageTable = React.createClass({
         )
     }
 });
-
 
 ReactDOM.render(
     <MessageTable messages={reactMessages}/>,
@@ -75,10 +80,6 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
-
-//function sendName() {
-//    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
-//}
 
 function showMessage(message) {
     $("#messages").append("<tr><td>" + message + "</td></tr>");
