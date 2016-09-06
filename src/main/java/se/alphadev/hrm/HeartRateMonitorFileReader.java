@@ -1,4 +1,4 @@
-package se.alphadev.johantestar;
+package se.alphadev.hrm;
 
 import reactor.core.publisher.Flux;
 

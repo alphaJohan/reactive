@@ -49,10 +49,4 @@ public class FileGenerator {
             e.printStackTrace();
         }
     }
-
-//    public static void main(String[] args) {
-//        FileGenerator fileGenerator = new FileGenerator();
-//        fileGenerator.generate();
-//        fileGenerator.read();
-//    }
 }
