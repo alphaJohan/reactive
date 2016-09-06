@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-import se.alphadev.reactive.Person;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,6 +32,7 @@ public class Consumer {
                     .take(30)
                     .map(Person::getName)
                     .doOnNext(s -> this.template.convertAndSend("/topic/data", s))
+                    .doOnTerminate(() -> this.template.convertAndSend("/topic/data", "finished"))
                     .subscribe();
 
         } catch (IOException e) {
