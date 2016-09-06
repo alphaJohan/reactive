@@ -2,6 +2,8 @@ package se.alphadev;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -24,28 +26,19 @@ public class Consumer {
     }
 
     public void consume() {
-
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             InputStream input = new FileInputStream("/tmp/data.json");
             List<Person> persons = objectMapper.readValue(input, new TypeReference<List<Person>>(){});
 
-            Flux<Person> flux = Flux.fromIterable(persons);
-
-
+            Flux.fromIterable(persons)
+                    .take(30)
+                    .map(Person::getName)
+                    .doOnNext(s -> this.template.convertAndSend("/topic/data", s))
+                    .subscribe();
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        for (int i = 0; i < 100; i++) {
-            String text = "{ message nr: " + i + " }";
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            this.template.convertAndSend("/topic/data", text);
         }
     }
 }
