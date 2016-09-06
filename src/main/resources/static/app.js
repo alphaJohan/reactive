@@ -3,7 +3,7 @@ var stompClient = null;
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
-    $("#message").html("");
+    $("#messages").html("");
 }
 
 function connect() {
@@ -14,12 +14,12 @@ function connect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/data', function (message) {
             // showGreeting(JSON.parse(greeting.body).content);
-            showGreeting(message.body);
+            showMessage(message.body);
         });
-        $.ajax({url: "/openstream", type:'POST', success: function(result){
-
-        }});
     });
+    $.ajax({url: "/openstream", type:'POST', success: function(result){
+
+    }});
 }
 
 function disconnect() {
@@ -34,13 +34,13 @@ function disconnect() {
 //    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 //}
 
-function showGreeting(message) {
-    $("#message").html(message);
+function showMessage(message) {
+    $("#messages").append("<tr><td>" + message + "</td></tr>");
 }
 
 function generate() {
     $.ajax({url: "/generate", type:'POST', success: function(result){
-        console.log('Data file generated');
+        console.log('Data file generated: ' + result);
     }});
 }
 
