@@ -7,26 +7,28 @@ public class Person {
         LOVER
     }
 
-    private int sequenceNo;
+    private int id;
     private String name;
+    private int salary;
     private Type type;
 
 
     public Person() {
     }
 
-    public Person(int sequenceNo, String name, Type type) {
-        this.sequenceNo = sequenceNo;
+    public Person(int id, String name, int salary, Type type) {
+        this.id = id;
         this.name = name;
+        this.salary = salary;
         this.type = type;
     }
 
-    public int getSequenceNo() {
-        return sequenceNo;
+    public int getId() {
+        return id;
     }
 
-    public void setSequenceNo(int sequenceNo) {
-        this.sequenceNo = sequenceNo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -35,6 +37,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public Type getType() {

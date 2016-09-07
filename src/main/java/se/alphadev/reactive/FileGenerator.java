@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.stereotype.Component;
+import se.alphadev.reactive.util.Alphabet;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,6 +17,7 @@ import java.util.Random;
 @Component
 public class FileGenerator {
 
+
     public void generate() {
         int counter = 0;
         ObjectMapper objectMapper = new ObjectMapper();
@@ -25,7 +27,14 @@ public class FileGenerator {
         for (int i = 0; i < 20000; i++) {
             Random r = new Random();
             Person.Type[] types = Person.Type.values();
-            Person person = new Person(++counter, "apa" + counter, types[r.nextInt(3)]);
+
+            Alphabet alphabet = Alphabet.UPPERCASE;
+            String name = alphabet.toChar(r.nextInt(alphabet.radix())) + ":son";
+            int salary = 30000 + r.nextInt(30000);
+            Person.Type type = types[r.nextInt(3)];
+
+            Person person = new Person(++counter, name,
+                    salary, type);
             persons.add(person);
         }
         try {
